@@ -1,0 +1,28 @@
+{
+  "collections": [
+    {
+      "name": "users",
+      "description": "User profiles",
+      "rules": [
+        {
+          "allow": ["read", "write"],
+          "condition": "request.auth != null && request.auth.uid == resource.id"
+        }
+      ]
+    },
+    {
+      "name": "travelLogs",
+      "description": "Travel journal entries",
+      "rules": [
+        {
+          "allow": ["read", "update", "delete"],
+          "condition": "request.auth != null && resource.data.userId == request.auth.uid"
+        },
+        {
+          "allow": ["create"],
+          "condition": "request.auth != null && request.resource.data.userId == request.auth.uid"
+        }
+      ]
+    }
+  ]
+}
